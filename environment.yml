@@ -1,0 +1,4 @@
+name: dev
+dependencies:
+  - python
+  - pip
