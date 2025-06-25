@@ -7,7 +7,7 @@
 - docker
 - vscode with `Dev Containers` (`ms-vscode-remote.remote-containers`) extension installed
 
-## Quickstart
+## Quickstart (rootful-docker)
 
 Adjust the name of the image in `docker-build.sh` and `.devcontainer/devcontainer.json`.
 
@@ -53,3 +53,12 @@ For more information, see [Sharing Git credentials with your container](https://
 ## With GPU/CUDA support
 
 For CUDA support, you can change the base image in the Dockerfile to something like `nvidia/cuda:12.9.1-cudnn-runtime-ubuntu24.04`.
+
+
+## Rootless Docker
+
+This is where the fun begins: if you are using rootless docker, you will find that the non-root container user (i.e., `dev`) can't create any files in the workspace.
+Inside the container, the workspace is owned by `root`, which is mapped back to your local users `uid`.
+And while your non-root container user `dev` has the same `uid` inside the container, it is mapped to an arbitrary `uid` outside the container.
+Unfortunately, there does currently not seem to be a good solution that handles bot rootless, as well as rootful Docker...
+Please see the `rootless` files and be aware, that you will be the root user inside the container...
