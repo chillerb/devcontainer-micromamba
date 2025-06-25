@@ -5,4 +5,4 @@
 # docker build -t miseegs-dev --build-arg USER_NAME=$(id -un) --build-arg USER_UID=$(id -u) --build-arg USER_GID=$(id -g) .
 IMAGE_NAME=devcontainer-micromamba-rootless
 
-docker build -t ${IMAGE_NAME} --build-arg USER_UID=$(id -u) --build-arg USER_GID=$(id -g) .
+docker build -t ${IMAGE_NAME} .
