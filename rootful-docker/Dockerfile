@@ -40,6 +40,7 @@ ENV MAMBA_DOCKERFILE_ACTIVATE=1
 
 # activate dev environment on default
 # ENV PATH="${MAMBA_ROOT_PREFIX}/envs/dev/bin:$PATH"
+RUN echo "alias mima=micromamba" >> ~/.bashrc
 RUN echo "micromamba activate dev" >> ~/.bashrc
 
 # expose mlflow, tensorboard, jupyter

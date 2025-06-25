@@ -11,10 +11,6 @@ RUN apt-get update --allow-releaseinfo-change && \
     apt-get -y autoremove && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# create .local/bin and add it to path (Dockerfile does not update PATH on user login)
-RUN mkdir -p ~/.local/bin
-ENV PATH=/home/${USER_NAME}/.local/bin/:${PATH}
-
 # install micromamba as root
 ENV MAMBA_ROOT_PREFIX=/root/micromamba
 RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj -C /usr/bin --strip-components=1 bin/micromamba \
@@ -30,6 +26,7 @@ ENV MAMBA_DOCKERFILE_ACTIVATE=1
 
 # activate dev environment on default
 # ENV PATH="${MAMBA_ROOT_PREFIX}/envs/dev/bin:$PATH"
+RUN echo "alias mima=micromamba" >> /root/.bashrc
 RUN echo "micromamba activate dev" >> /root/.bashrc
 
 # expose mlflow, tensorboard, jupyter
